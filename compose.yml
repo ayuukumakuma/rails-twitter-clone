@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: db
+    image: mysql:8
+    env_file: ./.env
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    container_name: app
+    build: .
+    env_file: ./.env
+    volumes:
+      - .:/app
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      - db
+
+volumes:
+  mysql-data:
