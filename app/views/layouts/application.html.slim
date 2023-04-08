@@ -9,4 +9,13 @@ html
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   body
+    .header(style='display: flex;')
+      .header__logo
+        = link_to 'Twitter Clone', root_path, class: 'header__logo__link', local: true
+      .header__search
+        = link_to 'ユーザー検索', search_path, class: 'header__search__link', local: true
+      // ログインしていない場合は表示させないようにしてください。
+      - if user_signed_in?
+        .header__profile
+          = link_to 'プロフィール', "/#{current_user.name}", class: 'header__profile__link', local: true
     = yield

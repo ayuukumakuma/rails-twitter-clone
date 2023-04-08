@@ -1,0 +1,11 @@
+// nameで検索するフォーム
+= form_with url: search_path, method: :get, local: true do |f|
+  = f.text_field :name, placeholder: 'ユーザー名で検索', class: 'search__form'
+  = f.submit '検索', class: 'search__button'
+// 検索結果を表示する. 検索ボタンが押されるまでは表示しないようにしてください。
+- if params[:name].present?
+  - @users.each do |user|
+    - unless user_signed_in? && current_user.id == user.id
+      // ユーザー名をクリックするとユーザーのプロフィールページに遷移しuser.idをパラメーターとして渡してください
+
+      = link_to user.name, "/#{user.name}", class: 'search__result__link', local: true, params: {user_id: user.id}

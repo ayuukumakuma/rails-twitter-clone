@@ -1,0 +1,19 @@
+.profile
+  .profile__name
+    // パスに含まれているユーザー名を表示するようにしてください。
+    = @user.name
+  .profile__follow__count
+    // フォロー数を表示するようにしてください。
+    = @user.followings.count
+    | フォロー
+    // フォロワー数を表示するようにしてください。
+    = @user.followers.count
+    | フォロワー
+  // ログインしているユーザーのプロフィールページの場合はプロフィールを編集するリンクを表示するようにしてください。
+  - if user_signed_in? && current_user.id == @user.id
+    .profile__edit
+      = link_to 'プロフィールを編集する', edit_user_registration_path, class: 'profile__edit__link', local: true
+  // ログインしていないユーザーのプロフィールページの場合はフォローボタンを表示するようにしてください。
+  - else
+    .profile__follow
+      = button_to 'フォローする', follow_path(@user.id), method: :post, class: 'profile__follow__button'

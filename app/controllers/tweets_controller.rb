@@ -2,11 +2,10 @@ class TweetsController < ApplicationController
   # ログインしていないときはログイン画面にリダイレクト
   before_action :authenticate_user!
 
-  def title
-  end
-
   def index
-    @tweets = current_user.tweets
+    # 自分とフォローしているユーザーのツイートを取得
+    # *current_user.following_idsは配列を展開してくれる
+    @tweets = Tweet.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc)
   end
 
   def new
@@ -19,17 +18,17 @@ class TweetsController < ApplicationController
 
   def destroy
     current_user.tweets.find(params[:id]).destroy
-    redirect_to timeline_path
+    redirect_to home_path
   end
 
   def create
     current_user.tweets.create(tweet_params)
-    redirect_to timeline_path
+    redirect_to home_path
   end
 
   def update
     current_user.tweets.find(params[:id]).update(tweet_params)
-    redirect_to timeline_path
+    redirect_to home_path
   end
 
   private

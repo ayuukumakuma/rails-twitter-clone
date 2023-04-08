@@ -1,5 +1,5 @@
 // tweetを更新するためのフォーム
-= form_with model: @tweet, url: tweet_path(@tweet), method: :patch do |f|
+= form_with model: @tweet, url: post_path(@tweet), method: :patch do |f|
   = f.label :content
   br
   = f.text_area :content, maxlength: 140

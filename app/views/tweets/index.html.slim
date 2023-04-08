@@ -1,8 +1,12 @@
 h1 タイムライン
+// 投稿ページへのリンクを作成してください。
 = link_to '投稿する', post_path
-ul
-  - @tweets.reverse.each do |t|
-    li = t.content
-    // buttonタグを使って削除ボタンを作成
-    = button_to '削除', tweet_path(t), method: :delete
-    = button_to '編集', edit_tweet_path(t), method: :get
+// ログインしているユーザーのツイートを表示するようにしてください。
+- @tweets.each do |tweet|
+  .tweet style='margin-bottom: 20px;'
+    .tweet__name
+      = tweet.user.name
+    .tweet__content
+      = tweet.content
+    .tweet__time
+      = tweet.created_at
