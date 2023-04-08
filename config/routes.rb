@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root to: 'tweets#title'
+  get 'profile', to: 'profiles#index'
+  get 'timeline', to: 'tweets#index'
+  get 'post', to: 'tweets#new'
+  get 'edit', to: 'tweets#edit'
+  # 外部からはこのパスは使えない
+  resources :tweets, inactive: true
 end

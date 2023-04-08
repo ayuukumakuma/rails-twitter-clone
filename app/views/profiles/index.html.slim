@@ -1,0 +1,5 @@
+.profile
+  .profile__email
+    = current_user.email
+  .profile__edit
+    = link_to 'プロフィールを編集する', edit_user_registration_path, class: 'profile__edit__link'
