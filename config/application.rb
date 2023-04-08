@@ -35,5 +35,6 @@ module App
     config.generators.system_tests = nil
 
     config.i18n.default_locale = :ja
+    config.controller_routing = false
   end
 end
